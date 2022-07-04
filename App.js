@@ -1,46 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button, TextInput,ScrollView,FlatList, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
-
+import Header from './Components/header';
 export default function App() {
-  const [people, setPeople] = useState([
-    {name:'Aniruddha', id:'1'},
-    {name:'Anurag', id:'2'},
-    {name:'Aditya', id:'3'},
-    {name:'Ajay', id:'4'},
-    {name:'Anjali', id:'5'},
-    {name:'Aryan', id:'6'},
-    {name:'baburao', id:'7'},
 
+  const [todos, setTodos] = useState([
+    {text:'buy manga', key:'1'},
+    {text: 'play some music', key: '2'},
+    {text: 'watch some anime', key:'3'},
+    {text:'play sitar', key:'4'},
   ]);
 
-  const presshandler = (id) => {
-    console.log(id)
-    setPeople((prevPeople) => {
-      return prevPeople.filter(person => person.id != id)
-    });
-  }
+
+ 
   
 
   return (
     <View style={styles.container}>
-      <FlatList 
-       keyExtractor={(item) => item.id}
-        data={people}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => presshandler(item.id)}>
-             <Text style={styles.item}>{ item.name }</Text>
-          </TouchableOpacity>
-          
-        )}
-      />
-    {/* <ScrollView>
-      { people.map(item => (
-        <View key={item.key}>
-          <Text style={styles.item}>{ item.name }</Text>
+      <Header />
+      <View style={styles.content}>
+        <View style={styles.list}>
+           <FlatList 
+             data = {todos}
+             renderItem = {({item}) => (
+              <Text>{item.text}</Text>
+             )}
+           />
         </View>
-      ))}
-    </ScrollView> */}
+      </View>
 
       
     </View>
@@ -58,12 +45,14 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
   },
 
-  item: {
-    backgroundColor:'pink',
-    marginTop:24,
-    padding:30,
-    fontSize:24,
+  content: {
+    padding: 40,
   },
+
+  list: {
+    marginTop: 20,
+  }
+ 
 
    
 
