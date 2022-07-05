@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, TextInput,ScrollView,FlatList, Touchabl
 import React, {useState} from 'react';
 import Header from './Components/header';
 import TodoItem from './Components/todoitem';
+import AddTodo from './Components/addTodo';
 export default function App() {
 
   const [todos, setTodos] = useState([
@@ -18,6 +19,15 @@ export default function App() {
     });
   }
 
+  const submitHandler = (text) => {
+    setTodos((prevTodos) => {
+      return [
+        {text:text, key:Math.random().toString()},
+        ...prevTodos
+      ];
+    })
+  }
+
 
  
   
@@ -26,6 +36,7 @@ export default function App() {
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
+        <AddTodo submitHandler = {submitHandler}/>
         <View style={styles.list}>
            <FlatList 
              data = {todos}
